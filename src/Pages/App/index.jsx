@@ -14,8 +14,8 @@ const AppUI = () => {
   const AppRoutes = () =>{ 
   
     const routes = useRoutes([
-    {path:'/',element:!user?<Login/> : <Home/>},
-    {path:'/home',element:!user ?<Login/> : <Home/>},
+    {path:'/',element:!user.emailVerified?<Login/> : <Home/>},
+    {path:'/home',element:!user.emailVerified ?<Login/> : <Home/>},
     {path:'/login',element:<Login/>},
     {path:'/singin',element:<Login/>},
     {path:'/signup',element:<SignUp/>},

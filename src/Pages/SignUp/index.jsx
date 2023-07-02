@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useFireBase } from '../../Components/useFIreBase'
 import { useNavigate } from 'react-router-dom'
+import { auth } from '../../Components/Firebase'
 
 const SignUp = () => {
 
@@ -18,7 +19,7 @@ const SignUp = () => {
 
     try {
       await registerUser(email,pass)
-      navegate('/home')
+       navegate('/home')
       
     } catch (error) {
       console.log('datos incorrectos')

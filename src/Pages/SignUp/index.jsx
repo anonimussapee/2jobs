@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { useFireBase } from '../../Components/useFIreBase'
 import { useNavigate } from 'react-router-dom'
-import { auth } from '../../Components/Firebase'
+import { ButtonLogin } from '../../Components/ButtonLogin'
 
 const SignUp = () => {
 
-  const {registerUser} = useFireBase()
+  const {registerUser, loginWithGoogle} = useFireBase()
 
   const [email, setEmail]= useState('')
   const [pass, setPass]= useState('')
@@ -48,7 +48,8 @@ const SignUp = () => {
 
             />
             <button type='submit' className='rounded-lg bg-gray-500 border-white text-white'>Registrar</button>
-        </form>
+      </form>
+     <ButtonLogin loginWithGoogle={loginWithGoogle} name="Google"/>
     </section>
   )
 }

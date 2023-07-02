@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { auth } from '../Firebase/'
-import {createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signOut } from 'firebase/auth'
+import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth'
 
 const useFireBase = () => {
 
@@ -34,6 +34,17 @@ const useFireBase = () => {
 
   const loginUser =  (email, password) =>signInWithEmailAndPassword(auth,email,password)
 
+  const loginWithGoogle = async () =>{
+    try {
+      const provider = new GoogleAuthProvider()
+      const userCredential = await signInWithPopup(auth,provider)
+      return userCredential.user
+    } catch (error) {
+      console.error('error al iniciar sesión con google', error)
+      throw error
+    }
+  }
+
   const logOutUser = () => signOut(auth);
 
   return {
@@ -41,7 +52,8 @@ const useFireBase = () => {
     setUser,
     registerUser,
     loginUser,
-    logOut:logOutUser
+    logOut:logOutUser,
+    loginWithGoogle
   }
 }
 export {useFireBase}

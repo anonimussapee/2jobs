@@ -1,11 +1,16 @@
-import { UserCircleIcon } from '@heroicons/react/24/solid'
+import './icon.css'
 
 const ButtonLogin = (props) => {
   return (
     <button onClick={()=>{
       props.loginWithGoogle()
       props.navegate('/')
-    }} className='w-[200px] h-auto rounded-lg bg-gray-700 border-blue-700 border-[3px] text-white flex items-center justify-center font-extrabold p-2'><UserCircleIcon className='w-20 h-16 bg-white rounded-full text-red-700'/>Ingresar con {props.name}</button> 
+    }} className={`w-[270px] h-[46px] flex items-center rounded-lg bg-[${props.bg}] `} > 
+    <img src={props.icon} alt="" className=' pr-[24px]'/>
+    <p className='font--icon  '>
+      Inicia sesión con {props.name}
+    </p>    
+    </button> 
   )
 }
 export {ButtonLogin}

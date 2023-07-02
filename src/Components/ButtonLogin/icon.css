@@ -1,0 +1,13 @@
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(../../assets/fonts/roboto.woff2) format('woff2');
+}
+.font--icon{
+  font-family: 'Roboto';
+  font-size: 1.6rem;
+  color: white;
+  font-weight: 700;
+}

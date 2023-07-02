@@ -49,7 +49,7 @@ const SignUp = () => {
             />
             <button type='submit' className='rounded-lg bg-gray-500 border-white text-white'>Registrar</button>
       </form>
-     <ButtonLogin loginWithGoogle={loginWithGoogle} name="Google"/>
+     <ButtonLogin loginWithGoogle={loginWithGoogle} navegate={navegate} name="Google"/>
     </section>
   )
 }

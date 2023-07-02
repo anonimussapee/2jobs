@@ -4,7 +4,7 @@ import './Navbar.css'
 
 const Navbar = (props) => {
 
-  const logRender = !props.user.emailVerified ? 'Login': 'SignOut'  
+  const logRender = !props.user?.emailVerified ? 'Login': 'SignOut'  
 
   const styleActive = 'underline-offset-2 underline'
   return (

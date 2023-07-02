@@ -23,11 +23,7 @@ const useFireBase = () => {
   const registerUser = async (email, password) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const config={
-        url :'https://twojobs.netlify.app/',
-        handleCodeInApp: true,
-      }
-      await sendEmailVerification(userCredential.user,config);
+      await sendEmailVerification(userCredential.user);
       console.log('Correo electrónico de verificación enviado.');
       return userCredential.user;
     } catch (error) {

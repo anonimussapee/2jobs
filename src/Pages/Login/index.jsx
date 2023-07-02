@@ -35,7 +35,7 @@ const Login = () => {
     <section className='w-[90%] min-w-[320px] h-[80vh] flex flex-col justify-center items-center gap-10' >
       <h1 className='text-center font-bold text-[2.3rem] w-[90%] min-w-[300px] max-w-[350px]'> Ingresa a la plataforma que esta cambiando la forma en la que obtenemos empleo </h1>
 
-      <ButtonLogin icon={googleicon} bg='#4285F4'  loginWithGoogle={loginWithGoogle} navegate={navegate} name="Google"/>
+      <ButtonLogin icon={googleicon} bg='g' bghover='ghover' loginWithGoogle={loginWithGoogle} navegate={navegate} name="Google"/>
 
       <form onSubmit={handleSubmit} className='flex flex-col w-[100%] min-w-[288px] max-w-[400px] gap-2 p-10 '>
         <input

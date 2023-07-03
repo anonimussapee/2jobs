@@ -9,6 +9,7 @@ import { useFireBase } from '../../Components/useFIreBase'
 import { SignOut } from '../SignOut'
 import { Terms } from '../Terms'
 import { Privacy } from '../Privacy'
+import { Erase } from '../Erase'
 
 
 const AppUI = () => {
@@ -20,6 +21,7 @@ const AppUI = () => {
     {path:'/home',element:!user?.emailVerified ?<Login/> : <Home user={user}/>},
     {path:'/terms',element:<Terms/>},
     {path:'/privacy',element:<Privacy/>},
+    {path:'/erase',element:<Erase/>},
     {path:'/login',element:<Login/>},
     {path:'/singin',element:<Login/>},
     {path:'/signup',element:<SignUp/>},

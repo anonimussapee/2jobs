@@ -14,8 +14,8 @@ const AppUI = () => {
   const AppRoutes = () =>{ 
   
     const routes = useRoutes([
-    {path:'/',element:!user?.emailVerified?<Login/> : <Home/>},
-    {path:'/home',element:!user?.emailVerified ?<Login/> : <Home/>},
+    {path:'/',element:!user?.emailVerified?<Login/> : <Home user={user}/>},
+    {path:'/home',element:!user?.emailVerified ?<Login/> : <Home user={user}/>},
     {path:'/login',element:<Login/>},
     {path:'/singin',element:<Login/>},
     {path:'/signup',element:<SignUp/>},
@@ -28,7 +28,7 @@ const AppUI = () => {
   return (
     <BrowserRouter>
       <Navbar user={user} />
-      <Layout>
+      <Layout >
         <AppRoutes/>
       </Layout>
     </BrowserRouter>

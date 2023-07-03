@@ -11,6 +11,10 @@
   color: white;
   font-weight: 700;
 }
+.roboto{
+  font-family: 'Roboto';
+  font-weight: 700;
+}
 .ghover:hover{
 background-color: #2c70de;
 }

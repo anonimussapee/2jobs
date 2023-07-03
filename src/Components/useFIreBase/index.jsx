@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { auth } from '../Firebase/'
-import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth'
+import { FacebookAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth'
 
 const useFireBase = () => {
 
@@ -8,10 +8,10 @@ const useFireBase = () => {
 
   useEffect(()=>{
     const unsuscribe = onAuthStateChanged(auth,(user)=>{
-      console.log(user)
+      // console.log(user, user.photoURL)
       if(user){
-        const {uid, email, phothoURL,displayName, emailVerified} = user
-        setUser({uid, email, phothoURL,displayName, emailVerified})
+        const {uid, email, photoURL,displayName, emailVerified} = user
+        setUser({uid, email, photoURL,displayName, emailVerified})
       }else{
         setUser(null)
       }
@@ -45,6 +45,17 @@ const useFireBase = () => {
     }
   }
 
+  const loginWithFacebook = async () => {
+    try {
+      const provider = new FacebookAuthProvider();
+      const userCredential = await signInWithPopup(auth, provider);
+      return userCredential.user;
+    } catch (error) {
+      console.error('Error al iniciar sesión con Facebook:', error);
+      throw error;
+    }
+  }
+
   const logOutUser = () => signOut(auth);
 
   return {
@@ -53,7 +64,8 @@ const useFireBase = () => {
     registerUser,
     loginUser,
     logOut:logOutUser,
-    loginWithGoogle
+    loginWithGoogle,
+    loginWithFacebook
   }
 }
 export {useFireBase}

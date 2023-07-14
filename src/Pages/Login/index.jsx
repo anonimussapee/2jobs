@@ -1,6 +1,5 @@
-import { useState } from 'react'
 import { useFireBase } from '../../Components/useFIreBase'
-import { Link, useNavigate} from 'react-router-dom'
+import { useNavigate} from 'react-router-dom'
 import { ButtonLogin } from '../../Components/ButtonLogin'
 import googleicon from '../../assets/iconGoogle.svg'
 import { ButtonFB } from '../../Components/ButtonLogin/ButtonFB'
@@ -10,27 +9,27 @@ const Login = () => {
 
   const {loginUser, loginWithGoogle, loginWithFacebook} = useFireBase()
 
-  const [email, setEmail]= useState('')
-  const [pass, setPass]= useState('')
+  // const [email, setEmail]= useState('')
+  // const [pass, setPass]= useState('')
 
   const navegate = useNavigate()
   
 
-  const handleSubmit = async(e) => {
+  // const handleSubmit = async(e) => {
 
-    e.preventDefault()
-    console.log(`procesando datos del login ${email} ${pass}`)
+  //   e.preventDefault()
+  //   console.log(`procesando datos del login ${email} ${pass}`)
 
-    try {
-      await loginUser(email,pass)
-      navegate('/home')
+  //   try {
+  //     await loginUser(email,pass)
+  //     navegate('/home')
 
-    } catch (error) {
-      console.log('datos incorrectos')
-    }
+  //   } catch (error) {
+  //     console.log('datos incorrectos')
+  //   }
 
 
-  }
+  // }
 
   return (
     <section className='w-[90%] min-w-[320px] h-[80vh] flex flex-col justify-center items-center gap-10' >
@@ -38,7 +37,7 @@ const Login = () => {
       <ButtonFB loginWithFacebook={loginWithFacebook} navegate={navegate}/>
       <ButtonLogin icon={googleicon} bg='g' bghover='ghover' loginWithGoogle={loginWithGoogle} navegate={navegate} name="Google"/>
 
-      <form onSubmit={handleSubmit} className='flex flex-col w-[100%] min-w-[288px] max-w-[400px] gap-2 p-10 '>
+      {/* <form onSubmit={handleSubmit} className='flex flex-col w-[100%] min-w-[288px] max-w-[400px] gap-2 p-10 '>
         <input
             className='border-gray-500 border-[2px] rounded-xl p-2'
             type='email'
@@ -55,8 +54,8 @@ const Login = () => {
 
         />
         <button type='submit' className='rounded-lg bg-gray-500 p-2 hover:bg-gray-700 border-white  text-white'>Acceder</button>
-      </form>
-      <Link to='/signup' ><p className='text-blue-800'>No tengo cuenta, Registrarme</p></Link>
+      </form> */}
+      {/* <Link to='/signup' ><p className='text-blue-800'>No tengo cuenta, Registrarme</p></Link> */}
     </section>
   )
 }

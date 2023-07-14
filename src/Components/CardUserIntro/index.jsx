@@ -12,7 +12,7 @@ const CardUserIntro = (props) => {
 
   return (
     <>
-      <div className={`w-[90%] min-w-[300px]  ${sizeHeigth}  flex flex-col gap-1  bg-white overflow-hidden`} >
+      <div className={`w-[90%] min-w-[288px]  ${sizeHeigth}  flex flex-col gap-1  bg-white overflow-hidden`} >
         {/* image name and specialty*/}
         <div className='img bgUser flex flex-col gap-1 justify-center items-center bg-gray-200 w-[100%] h-[18rem] py-3 rounded-t-xl relative'>
           <img src={props.user.photoURL||''} alt={props.user.displayName} className='w-[100px] h-[100px] rounded-full'/>

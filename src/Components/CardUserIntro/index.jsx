@@ -4,6 +4,8 @@ import './cardUser.css'
 
 const CardUserIntro = (props) => {
 
+  // console.log(props.usersDt.find(item=>item.uid===props.user.uid));
+  const thisUser = props.usersDt.find(item=>item.uid===props.user.uid)
   const [panel , setPanel ] = useState(false)
 
   const iconRender = panel ? (<ChevronUpIcon className='w-10 h-10 '/>) :(<ChevronDownIcon className='w-10 h-10 '/>)
@@ -15,10 +17,10 @@ const CardUserIntro = (props) => {
       <div className={`w-[90%] min-w-[288px]  ${sizeHeigth}  flex flex-col gap-1  bg-white overflow-hidden`} >
         {/* image name and specialty*/}
         <div className='img bgUser flex flex-col gap-1 justify-center items-center bg-gray-200 w-[100%] h-[18rem] py-3 rounded-t-xl relative'>
-          <img src={props.user.photoURL||''} alt={props.user.displayName} className='w-[100px] h-[100px] rounded-full'/>
+          <img src={thisUser.photoURL||''} alt={thisUser.displayName} className='w-[100px] h-[100px] rounded-full'/>
           <div className='bg-blur relative w-[200px] h-[60px] text-center flex flex-col gap-0 '>
-            <p className='roboto cursor-pointer'>{props.user.displayName}</p>
-            <p>Desarrollador web</p>
+            <p className='roboto cursor-pointer'>{thisUser.displayName}</p>
+            <p>{thisUser.profession}</p>
           </div> 
         </div> 
         {/* quantity of the contacts  */}

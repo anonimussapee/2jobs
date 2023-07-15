@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { auth, db } from '../Firebase/'
-import { FacebookAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth'
+import { FacebookAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut, getAuth } from 'firebase/auth'
 
-import { collection, getDocs } from "firebase/firestore"; 
+import { collection, doc, getDocs, query, setDoc, where } from "firebase/firestore"; 
 
 
 const useFireBase = () => {
@@ -10,31 +10,56 @@ const useFireBase = () => {
   const [user, setUser] = useState(false);
   const [dtDb, setDtDb] =  useState([]);
   const [sincronize, setSincronize] = useState(true);
+  const [loading, setLoading]= useState(false)
   // const uid = auth.currentUser.uid;
-
-
-  // console.log('this is data of db in useFirebase',db);
  
- 
-    console.log(dtDb)
-      
-   
+  const [usersDt, setUsersDt] = useState([]);
 
-  useEffect(()=>{
-    const unsuscribe = onAuthStateChanged(auth,(user)=>{
-      // console.log(user, user.photoURL)
-      if(user){
-        const {uid, email, photoURL,displayName, emailVerified} = user
-        setUser({uid, email, photoURL,displayName, emailVerified})
-        // console.log(user)
-      }else{
-        setUser(null)
+
+  useEffect(() => {
+    const getUsers = async () => {
+      try {
+        const usersRef = collection(db, 'users');
+        const querySnapshot = await getDocs(usersRef);
+        const usersData = querySnapshot.docs.map((doc) => doc.data());
+        setUsersDt(usersData);
+        console.log(usersData)
+        setLoading(true)
+        // Verificar si el usuario autenticado ya existe en la base de datos
+        const currentUser = usersData.find((user) => user.uid === user.uid);
+        if (!currentUser) {
+          // Si el usuario no existe, crear un nuevo documento
+          const userRef = doc(db, 'users', user.uid);
+          const newUser = {
+            uid: user.uid,
+            email: user.email,
+            photoURL: user.photoURL,
+            displayName: user.displayName,
+            emailVerified: user.emailVerified,
+          };
+          await setDoc(userRef, newUser);
+        }
+      } catch (error) {
+        console.error('Error al obtener los usuarios:', error);
       }
+    };
+  
+    getUsers();
+  }, []);
 
-      
-    })
-    return () => unsuscribe()
-  },[]);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const { uid, email, photoURL, displayName, emailVerified } = user;
+        setUser({ uid, email, photoURL, displayName, emailVerified });
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => unsubscribe();
+  }, [usersDt]);
+
 
   useEffect(()=>{
       
@@ -45,7 +70,7 @@ const useFireBase = () => {
            const datanew = [] 
            querySnapShot?.forEach(doc=>{
              const data = doc.data()
-             console.log('this data is of foreach of querysnapshot',data)
+            //  console.log('this data is of foreach of querysnapshot',data)
              datanew.push(data)
            })
            setDtDb(datanew);
@@ -104,7 +129,9 @@ const useFireBase = () => {
     logOut:logOutUser,
     loginWithGoogle,
     loginWithFacebook,
-    dtDb
+    dtDb,
+    usersDt,
+    loading
   }
 }
 export {useFireBase}

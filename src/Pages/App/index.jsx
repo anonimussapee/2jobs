@@ -9,20 +9,24 @@ import { Terms } from '../Terms'
 import { Privacy } from '../Privacy'
 import { Erase } from '../Erase'
 import { SignOut } from '../SignOut'
+import { Perfil } from '../Perfil'
+import { PostPage } from '../PostPage'
 
 
 const AppUI = () => {
-  const {user, dtDb} = useFireBase()
+  const {user, dtDb, usersDt, loading} = useFireBase()
   // console.log('user at app',user);
   const AppRoutes = () =>{ 
   
     const routes = useRoutes([
-    {path:'/',element:!user?.emailVerified?<Login/> : <Home user={user} dtDb={dtDb}/>},
-    {path:'/home',element:!user?.emailVerified ?<Login/> : <Home user={user} dtDb={dtDb} />},
+    {path:'/',element:!user?.emailVerified?<Login/> : <Home loading={loading} user={user} dtDb={dtDb} usersDt={usersDt}/>},
+    {path:'/home',element:!user?.emailVerified ?<Login/> : <Home loading={loading} user={user} dtDb={dtDb} usersDt={usersDt} />},
+    {path:'/postform',element:<PostPage user={user} />},
     {path:'/terms',element:<Terms/>},
     {path:'/privacy',element:<Privacy/>},
     {path:'/erase',element:<Erase/>},
     {path:'/login',element:<Login/>},
+    {path:'/perfil',element:<Perfil user={user} usersDt={usersDt}/>},
     {path:'/signin',element:<Login/>},
     {path:'/signout',element:<SignOut/>},
 
@@ -32,12 +36,14 @@ const AppUI = () => {
   }
 
   return (
-    <BrowserRouter>
-      <Navbar user={user} />
-      <Layout >
-        <AppRoutes/>
-      </Layout>
-    </BrowserRouter>
+    
+      <BrowserRouter>
+        <Navbar user={user} />
+        <Layout >
+          <AppRoutes/>
+        </Layout>
+      </BrowserRouter>
+
   )
 }
 

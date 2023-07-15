@@ -5,6 +5,7 @@ import './Navbar.css'
 const Navbar = (props) => {
 
   const logRender = !props.user?.emailVerified ? 'Login': 'SignOut'  
+  const hiddenProp = !props.user?.emailVerified ? 'hidden': '';
 
   const styleActive = 'underline-offset-2 underline'
   return (
@@ -18,8 +19,10 @@ const Navbar = (props) => {
         </NavLink>
       </ul>
       <ul className='flex gap-3  ' >
-        
-        <NavLink to={`/${logRender.toLowerCase()}`} className={({isActive})=> isActive ? styleActive : null }>
+      <NavLink to={`/postform`} className={({isActive})=> isActive ? styleActive : null }>
+          <li>Postear</li>
+        </NavLink>
+        <NavLink to={`/${logRender.toLowerCase()}`} className={({isActive})=> isActive ? `${hiddenProp} `+styleActive : null } >
           <li>{logRender}</li>
         </NavLink>
       </ul>

@@ -1,0 +1,18 @@
+.btn-container::-webkit-scrollbar{
+  
+  display: none;
+
+}
+.btn-container{
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  gap: 1px;
+}
+.btn-card{
+  height: 35px;
+  width: auto;
+  
+  min-width: 160px;
+
+}

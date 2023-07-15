@@ -4,7 +4,7 @@ const CardPost = (props) => {
 
   let userdata = props.usersDt.find(item=> item.uid===props.author)
 
-  userdata= userdata === undefined ? props.author : userdata
+  userdata= userdata === undefined ? ' ' : userdata
 
   const date = new Date((props.date.seconds + 1687705552000 ) || Number(props.date ) )
   

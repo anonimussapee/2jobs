@@ -5,7 +5,11 @@ import './cardUser.css'
 const CardUserIntro = (props) => {
 
   // console.log(props.usersDt.find(item=>item.uid===props.user.uid));
-  const thisUser = props.usersDt.find(item=>item.uid===props.user.uid)
+
+  let thisUser = props.usersDt.find(item=>item.uid===props.user.uid)
+  if(!thisUser){
+    thisUser=props.user
+  }
   const [panel , setPanel ] = useState(false)
 
   const iconRender = panel ? (<ChevronUpIcon className='w-10 h-10 '/>) :(<ChevronDownIcon className='w-10 h-10 '/>)
@@ -20,7 +24,7 @@ const CardUserIntro = (props) => {
           <img src={thisUser.photoURL||''} alt={thisUser.displayName} className='w-[100px] h-[100px] rounded-full'/>
           <div className='bg-blur relative w-[200px] h-[60px] text-center flex flex-col gap-0 '>
             <p className='roboto cursor-pointer'>{thisUser.displayName}</p>
-            <p>{thisUser.profession}</p>
+            <p>{thisUser.profession || '-----'}</p>
           </div> 
         </div> 
         {/* quantity of the contacts  */}

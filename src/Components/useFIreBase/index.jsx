@@ -23,8 +23,6 @@ const useFireBase = () => {
         const querySnapshot = await getDocs(usersRef);
         const usersData = querySnapshot.docs.map((doc) => doc.data());
         setUsersDt(usersData);
-        console.log(usersData)
-        setLoading(true)
         // Verificar si el usuario autenticado ya existe en la base de datos
         const currentUser = usersData.find((user) => user.uid === user.uid);
         if (!currentUser) {
@@ -39,6 +37,8 @@ const useFireBase = () => {
           };
           await setDoc(userRef, newUser);
         }
+        console.log(usersData)
+        setLoading(true)
       } catch (error) {
         console.error('Error al obtener los usuarios:', error);
       }

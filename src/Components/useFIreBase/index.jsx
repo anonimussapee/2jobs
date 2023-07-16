@@ -14,38 +14,41 @@ const useFireBase = () => {
   // const uid = auth.currentUser.uid;
  
   const [usersDt, setUsersDt] = useState([]);
-
-
   useEffect(() => {
     const getUsers = async () => {
       try {
         const usersRef = collection(db, 'users');
         const querySnapshot = await getDocs(usersRef);
-        const usersData = querySnapshot.docs.map((doc) => doc.data());
-        setUsersDt(usersData);
-        // Verificar si el usuario autenticado ya existe en la base de datos
-        const currentUser = usersData.find((userItem) => userItem.uid === user.uid);
-        if (!currentUser) {
-          // Si el usuario no existe, crear un nuevo documento
-          const userRef = doc(db, 'users', user.uid);
-          const newUser = {
-            uid: user.uid,
-            email: user.email,
-            photoURL: user.photoURL,
-            displayName: user.displayName,
-            emailVerified: user.emailVerified,
-          };
-          await setDoc(userRef, newUser);
+        const usersData = querySnapshot?.docs.length > 0 ? querySnapshot.docs.map((doc) => doc.data()) : [];
+        setUsersDt(usersData)
+  
+        if (usersData.length > 0) {
+          const currentUser = usersData.find((userItem) => userItem.uid === user.uid);
+          if (!currentUser) {
+            // Si el usuario no existe, crear un nuevo documento
+            const userRef = doc(db, 'users', user.uid);
+            const newUser = {
+              uid: user.uid,
+              email: user.email,
+              photoURL: user.photoURL,
+              displayName: user.displayName,
+              emailVerified: user.emailVerified,
+            };
+            await setDoc(userRef, newUser);
+          }
         }
-        console.log(usersData)
-        setLoading(true)
+        console.log(usersData);
+        setLoading(true);
       } catch (error) {
         console.error('Error al obtener los usuarios:', error);
       }
     };
   
-    getUsers();
-  }, []);
+    if (user) {
+      getUsers();
+    }
+  }, [user]);
+  
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -58,7 +61,7 @@ const useFireBase = () => {
     });
 
     return () => unsubscribe();
-  }, [usersDt]);
+  }, []);
 
 
   useEffect(()=>{

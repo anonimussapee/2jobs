@@ -42,7 +42,7 @@ const Perfil = (props) => {
   return (
     <>
       <div className="w-full max-w-[480px] h-[250px] img relative flex justify-center items-center rounded-xl"  style={{backgroundImage:`url(${formData.banner || 'https://images.pexels.com/photos/2150/sky-space-dark-galaxy.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'})`}}>
-        <img src={formData.photoURL} alt="Image Avatar" className='w-[200px] h-[200px] rounded-full border-white border-[2px]'/>
+        <img src={formData.photoURL} alt="Image Avatar" className='w-[200px] h-[200px] rounded-full border-white border-[2px] object-cover'/>
       </div>
       <form onSubmit={handleSubmit} className="max-w-3xl mx-auto p-4 md:p-8 bg-gray-100 rounded-lg">
         <label className="block mb-4">

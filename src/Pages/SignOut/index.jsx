@@ -15,7 +15,7 @@ const SignOut = (props) => {
       <section className='w-[90%] min-w-[320px] h-[80vh] flex flex-col justify-center items-center'>
         <h1 className='text-center font-bold text-[2.3rem]'>Sessión abierta:</h1>
         <div className='flex flex-col w-[100%] min-w-[288px] max-w-[400px] gap-10 p-10 '>
-          <img src={thisUser.photoURL} alt="" className='w-[140px] h-[140px] self-center rounded-full'/>
+          <img src={thisUser.photoURL} alt="" className='w-[140px] h-[140px] self-center rounded-full object-cover'/>
           <div>
             <p className='font-bold'>Usuario: </p>
             <p>{thisUser.displayName}</p>

@@ -21,7 +21,7 @@ const CardUserIntro = (props) => {
       <div className={`w-[90%] min-w-[288px]  ${sizeHeigth}  flex flex-col gap-1  bg-white overflow-hidden`} >
         {/* image name and specialty*/}
         <div className='img bgUser flex flex-col gap-1 justify-center items-center bg-gray-200 w-[100%] h-[22rem] py-3 rounded-t-xl relative' style={{backgroundImage:`url(${thisUser.banner || 'https://images.pexels.com/photos/2150/sky-space-dark-galaxy.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'})`}}>
-          <img src={thisUser.photoURL||''} alt={thisUser.displayName} className='w-[100px] h-[100px] rounded-full'/>
+          <img src={thisUser.photoURL||''} alt={thisUser.displayName} className='w-[100px] h-[100px] rounded-full object-cover'/>
           <div className='bg-blur relative w-min-[270px] w-auto w-max-[500px] px-5 h-min-[60px] h-[10rem] items-center justify-center flex flex-col gap-0 '>
             <p className='roboto cursor-pointer'>{thisUser.displayName}</p>
             <p>{thisUser.profession || '-----'}</p>

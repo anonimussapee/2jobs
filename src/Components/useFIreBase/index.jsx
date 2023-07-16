@@ -24,7 +24,7 @@ const useFireBase = () => {
         const usersData = querySnapshot.docs.map((doc) => doc.data());
         setUsersDt(usersData);
         // Verificar si el usuario autenticado ya existe en la base de datos
-        const currentUser = usersData.find((user) => user.uid === user.uid);
+        const currentUser = usersData.find((userItem) => userItem.uid === user.uid);
         if (!currentUser) {
           // Si el usuario no existe, crear un nuevo documento
           const userRef = doc(db, 'users', user.uid);

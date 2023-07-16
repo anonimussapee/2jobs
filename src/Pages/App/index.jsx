@@ -14,11 +14,11 @@ import { PostPage } from '../PostPage'
 
 
 const AppUI = () => {
-  const {user, dtDb, usersDt, loading} = useFireBase()
+  const {user, dtDb, usersDt, loading, setSincronize,logOut} = useFireBase()
   // console.log('user at app',user);
   const AppRoutes = () =>{ 
   
-    const routes = useRoutes([
+    const routesList =[
     {path:'/',element:!user?.emailVerified?<Login/> : <Home loading={loading} user={user} dtDb={dtDb} usersDt={usersDt}/>},
     {path:'/home',element:!user?.emailVerified ?<Login/> : <Home loading={loading} user={user} dtDb={dtDb} usersDt={usersDt} />},
     {path:'/postform',element:<PostPage user={user} />},
@@ -26,13 +26,13 @@ const AppUI = () => {
     {path:'/privacy',element:<Privacy/>},
     {path:'/erase',element:<Erase/>},
     {path:'/login',element:<Login/>},
-    {path:'/perfil',element:<Perfil user={user} usersDt={usersDt}/>},
+    {path:'/perfil',element:<Perfil user={user} usersDt={usersDt} setSincronize={setSincronize}/>},
     {path:'/signin',element:<Login/>},
-    {path:'/signout',element:<SignOut/>},
+    {path:'/signout',element:<SignOut user={user} logOut={logOut} usersDt={usersDt}/>},
+    ]
 
-  
-  ])
-  return routes
+    const routes = useRoutes(routesList)
+    return routes
   }
 
   return (

@@ -37,7 +37,7 @@ const useFireBase = () => {
             await setDoc(userRef, newUser);
           }
         }
-        console.log(usersData);
+        // console.log(usersData);
         setLoading(true);
       } catch (error) {
         console.error('Error al obtener los usuarios:', error);
@@ -47,7 +47,7 @@ const useFireBase = () => {
     if (user) {
       getUsers();
     }
-  }, [user]);
+  }, [user,sincronize]);
   
 
   useEffect(() => {
@@ -61,7 +61,7 @@ const useFireBase = () => {
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [sincronize]);
 
 
   useEffect(()=>{
@@ -134,7 +134,8 @@ const useFireBase = () => {
     loginWithFacebook,
     dtDb,
     usersDt,
-    loading
+    loading,
+    setSincronize
   }
 }
 export {useFireBase}

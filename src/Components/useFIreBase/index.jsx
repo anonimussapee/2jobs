@@ -14,6 +14,11 @@ const useFireBase = () => {
   // const uid = auth.currentUser.uid;
  
   const [usersDt, setUsersDt] = useState([]);
+  // pexels in firebase
+  const [pexels,setPexels] = useState([]);
+  const [pexelsReady,setPexelsReady] = useState(false);
+
+
   useEffect(() => {
     const getUsers = async () => {
       try {
@@ -85,6 +90,30 @@ const useFireBase = () => {
   })()
   },[sincronize])
 
+  // this fetch effect is for pexels urls save in firebase
+  useEffect(()=>{
+      
+    (async() => {
+     try{
+       const querySnapShot =await getDocs( collection(db, 'pexels'))
+             // console.log("data of query snapshot in useFirebase", querySnapShot)
+             const datanew = [] 
+             querySnapShot?.forEach(doc=>{
+               const data = doc.data()
+              //  console.log('this data is of foreach of querysnapshot',data)
+               datanew.push(data)
+              })
+              setPexels(datanew)
+              setPexelsReady(true)
+              // console.log('pexels in firebase',datanew)
+             
+     }catch (err){
+      console.error(err)
+     }
+    
+    })()
+  },[])
+
   // const registerUser = (email, password) => createUserWithEmailAndPassword(auth,email,password)
   const registerUser = async (email, password) => {
     try {
@@ -135,7 +164,9 @@ const useFireBase = () => {
     dtDb,
     usersDt,
     loading,
-    setSincronize
+    setSincronize,
+    pexels,
+    pexelsReady
   }
 }
 export {useFireBase}

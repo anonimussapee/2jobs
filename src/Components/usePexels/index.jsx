@@ -7,7 +7,7 @@ import { useFireBase } from '../useFIreBase'
 const usePexels = () => {
 
   const [data,setData] = useState([])
-  const {pexels,pexelsReady} = useFireBase([])
+  // const {pexels,pexelsReady} = useFireBase([])
 
 
 

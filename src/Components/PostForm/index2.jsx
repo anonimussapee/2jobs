@@ -1,27 +1,47 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../Firebase';
+import {usePexels}  from '../usePexels'
 
 const PostForm = (props) => {
  
+  const [query, setQuery ] = useState('')   
 
+  const { fetch} = usePexels();
   
   const [formData, setFormData] = useState({
     author: props.user.uid || '',
     offer: '',
     city: '',
     date:new Date().getTime(),
+    category: '',
     salary: '',
     image: '',
     title: '',
   });
 
+  const [photo, setPhoto]= useState([])
+   
   
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     console.log(e.target.name);
   };
 
+ useEffect(()=>{
+      const data = fetch(query)
+      const photos = data.photos?.map((item, index) => {
+        if (index < 15) {
+        return <img key={item.url} src={item.src} alt={item.alt} loading='eager' className='w-[150px] h-[130px]' />;
+        }else if (index < 25) {
+          return <img key={item.url} src={item.src} alt={item.alt} loading='lazy' className='w-[150px] h-[130px]' />;
+          }
+      });
+      setPhoto(photos);
+      console.log('render this data',data);
+ 
+ },[query])
+    
 
 
 
@@ -121,7 +141,7 @@ const PostForm = (props) => {
           className="border border-gray-300 rounded-md px-3 py-2 w-full mt-1"
         />
       </label>
-      {/* <label className="mb-4 hidden">
+      <label className="mb-4 hidden">
         Categoria
         <input
           required
@@ -182,7 +202,7 @@ const PostForm = (props) => {
       </label>
       <div className='w-full h-[150px] flex gap-2 overflow-x-scroll'>
        {photo}
-      </div> */}
+      </div>
       <button
         type="submit"
         className="bg-blue-500 hover:bg-blue-600 text-white rounded-md px-4 py-2 mt-4 self-center block"

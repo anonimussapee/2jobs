@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../Firebase';
 import { useNavigate } from 'react-router-dom';
+import './postForm.css'
 
 const PostForm = (props) => {
   const [formData, setFormData] = useState({
@@ -48,23 +49,23 @@ const PostForm = (props) => {
  
   return (
     <>
-      <div className='w-[90%] min-w-[300px] max-w-[620px] h-[250px] overflow-y-scroll flex flex-col items-start bg-gray-200 border-[1px] text-[1.3rem] rounded-xl p-3 smMax:fixed smMax:top-[60px] '>
+      <div className='w-[90%] min-w-[300px] max-w-[480px] smMax:h-[30vh] overflow-y-scroll flex flex-col items-start bg-gray-200 border-[1px] text-[1.3rem] rounded-xl mb-3 p-2 scrollNone'>
         <div className=' flex items-center gap-5 self-start'>
           <img src={props.user.photoURL } alt={props.user.displayName} className='w-10 h-10 rounded-full' />
           <p className=' font-bold text-black text-left'>{props.user.displayName}</p>
         </div>
         <h3 className='font-extrabold'>Oferta laboral - {formData.title || ''}</h3>
       
-        <img loading='lazy' src={`${formData.image}`} alt={formData.title || 'imagen de evento tal'} className='w-[100%] min-w-[270px] max-w-[620px] h-[100px] rounded-xl' />
+        <img loading='lazy' src={`${formData.image}`} alt={formData.title || 'imagen de evento tal'} className='w-[100%] min-w-[270px] max-w-[420px] h-[150px] smMax:h-[100px] rounded-xl self-center' />
         <p className='w-[90%] min-w-[280px] max-w-[600px] h-auto  font-bold'>Contenido de la Oferta</p>
         <p className='w-[90%] min-w-[280px] max-w-[600px] h-auto  '>{formData.offer}</p>
         <p><strong>Salario estimado: </strong>$ {(Number(formData.salary)).toFixed(2)} </p>
         <p><strong>Lugar: </strong> {formData.city}</p>       
       </div>
   
-    <form onSubmit={handleSubmit} className=" flex flex-col max-w-3xl mx-auto p-4 md:p-8 bg-gray-100 rounded-lg smMax:mt-[240px] smMax:fixed smMax:bottom-0 smMax:overflow-y-scroll smMax:h-[45vh] smMax:py-8">
+    <form onSubmit={handleSubmit} className=" flex flex-col max-w-3xl mx-auto p-4 md:p-8 bg-gray-100 rounded-lg smMax:h-[55vh] overflow-y-scroll scrollNone">
       
-      <label className="block mb-4">
+      <label className="block mb-1">
         Título de la oferta laboral:
         <input
           required
@@ -75,7 +76,7 @@ const PostForm = (props) => {
           className="border border-gray-300 rounded-md px-3 py-2 w-full mt-1"
         />
       </label>
-      <label className="block mb-4">
+      <label className="block mb-1">
         Descripción de la oferta laboral:
         <textarea
           name="offer"
@@ -84,7 +85,7 @@ const PostForm = (props) => {
           className="border border-gray-300 rounded-md px-3 py-2 w-full mt-1"
         />
       </label>
-      <label className="block mb-4">
+      <label className="block mb-1">
         Ciudad donde solicitas personal:
         <input
           required
@@ -95,7 +96,7 @@ const PostForm = (props) => {
           className="border border-gray-300 rounded-md px-3 py-2 w-full mt-1"
         />
       </label>
-      <label className="block mb-4">
+      <label className="block mb-1">
         Salario:
         <input
           required
@@ -106,7 +107,7 @@ const PostForm = (props) => {
           className="border border-gray-300 rounded-md px-3 py-2 w-full mt-1"
         />
       </label>
-      <label className="block mb-4">
+      <label className="block mb-1">
         Ingresa el URL de una imagen que represente tu propuesta:
         <input
           required

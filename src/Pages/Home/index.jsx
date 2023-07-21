@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { CardPost } from '../../Components/CardPost'
 import { CardUserIntro } from '../../Components/CardUserIntro'
 import { PostList } from '../../Components/PostList'

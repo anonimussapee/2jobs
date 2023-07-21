@@ -3,18 +3,15 @@
   background-position: center;
   background-repeat: no-repeat;
 }
-.bgUser{
- background-image: url(../../assets/bgUser.jpg);
- z-index: 1;
-}
 
-.bg-blur::before{
+/* .bg-blur::before{
  content: '';
  width: 100%;
  height: 100%;
  border-radius: 20px;
- background-color: rgba(255, 255, 255, 0.701);
- filter: blur(30px);
  position: absolute;
  z-index: -1;
+} */
+.text-shadow{
+  text-shadow: white -1px .5px 3px, white .5px -1px 3px;
 }

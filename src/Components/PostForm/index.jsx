@@ -1,55 +1,35 @@
 import React, { useState } from 'react';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../Firebase';
+import { useNavigate } from 'react-router-dom';
 
 const PostForm = (props) => {
- 
-
-  
   const [formData, setFormData] = useState({
     author: props.user.uid || '',
     offer: '',
     city: '',
-    date:new Date().getTime(),
+    date: new Date().getTime(),
     salary: '',
-    image: '',
+    image: 'https://images.pexels.com/photos/5673507/pexels-photo-5673507.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', // Eliminamos el valor predeterminado para la imagen
     title: '',
   });
 
-  
+
+  const navigate =  useNavigate();
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    console.log(e.target.name);
   };
-
-
-
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     if (formData.category !== '') {
-  //       setReturnDo(false)
-  //       const { data } = await usePexels(formData.category);
-  //       const photos = data.photos?.map((item, index) => {
-  //         if (index < 25) {
-  //           return <img key={item.url} src={item.src} alt={item.alt} loading='lazy' className='w-[150px] h-[130px]' />;
-  //         }
-  //       });
-  //       setPhoto(photos);
-  //       console.log(data);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, [formData.category]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      await addDoc(collection(db, 'posts'), formData);
-      // await db.collection('posts').doc().set(formData)
+      const formDataWithNewDate = {...formData, date: new Date().getTime()}
+      await addDoc(collection(db, 'posts'), formDataWithNewDate);
       console.log('Publicación creada correctamente');
+      props.setNewPost(false)
+      navigate('/')
     } catch (error) {
       console.error('Error al crear la publicación', error);
     }
@@ -60,13 +40,29 @@ const PostForm = (props) => {
       offer: '',
       city: '',
       salary: '',
-      image: '',
+      image: 'https://images.pexels.com/photos/5673507/pexels-photo-5673507.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       title: '',
     });
   };
 
+ 
   return (
-    <form onSubmit={handleSubmit} className=" flex flex-col max-w-3xl mx-auto p-4 md:p-8 bg-gray-100 rounded-lg">
+    <>
+      <div className='w-[90%] min-w-[300px] max-w-[620px] h-[250px] overflow-y-scroll flex flex-col items-start bg-gray-200 border-[1px] text-[1.3rem] rounded-xl p-3 smMax:fixed smMax:top-[60px] '>
+        <div className=' flex items-center gap-5 self-start'>
+          <img src={props.user.photoURL } alt={props.user.displayName} className='w-10 h-10 rounded-full' />
+          <p className=' font-bold text-black text-left'>{props.user.displayName}</p>
+        </div>
+        <h3 className='font-extrabold'>Oferta laboral - {formData.title || ''}</h3>
+      
+        <img loading='lazy' src={`${formData.image}`} alt={formData.title || 'imagen de evento tal'} className='w-[100%] min-w-[270px] max-w-[620px] h-[100px] rounded-xl' />
+        <p className='w-[90%] min-w-[280px] max-w-[600px] h-auto  font-bold'>Contenido de la Oferta</p>
+        <p className='w-[90%] min-w-[280px] max-w-[600px] h-auto  '>{formData.offer}</p>
+        <p><strong>Salario estimado: </strong>$ {(Number(formData.salary)).toFixed(2)} </p>
+        <p><strong>Lugar: </strong> {formData.city}</p>       
+      </div>
+  
+    <form onSubmit={handleSubmit} className=" flex flex-col max-w-3xl mx-auto p-4 md:p-8 bg-gray-100 rounded-lg smMax:mt-[240px] smMax:fixed smMax:bottom-0 smMax:overflow-y-scroll smMax:h-[45vh] smMax:py-8">
       
       <label className="block mb-4">
         Título de la oferta laboral:
@@ -111,7 +107,7 @@ const PostForm = (props) => {
         />
       </label>
       <label className="block mb-4">
-        URL de una imagen que represente tu propuesta:
+        Ingresa el URL de una imagen que represente tu propuesta:
         <input
           required
           type="text"
@@ -120,69 +116,8 @@ const PostForm = (props) => {
           onChange={handleChange}
           className="border border-gray-300 rounded-md px-3 py-2 w-full mt-1"
         />
-      </label>
-      {/* <label className="mb-4 hidden">
-        Categoria
-        <input
-          required
-          type="text"
-          name="category"
-          onChange={handleChange}
-          value={formData.category}
-          className="border border-gray-300 rounded-md px-3 py-2 w-full mt-1"
-        />
-      </label>
-      <label className="block mb-4">
-        Categoría: 
-        <select name="category" id="category_list" className='border-[#333333] border-[3px] rounded-xl ml-5' value={formData.category}
-          onChange={(e)=>{
-            handleChange(e)
-            setQuery(e.target.value)
-          }}>
-          <option value="" >escoge una opcion</option>
-          <optgroup label='Tecnología y desarollo'>
-            <option value="website" >Desarrollo web</option>
-            <option value="phones">Desarrollo movil</option>
-            <option value="code">Cloud manager</option>
-            <option value="artificial intelligence">Tecnología</option>
-            <option value="graphic designer">Diseño gráfico</option>  
-          </optgroup>
-          <optgroup label='Cuidado de mascotas'>
-            <option value="cat">Cuidador de gatos</option>
-            <option value="dog">Cuidador de perros</option>
-          </optgroup>
-          <optgroup label='Marketing y ventas'>
-            <option value="Customer Support">Atención al cliente</option>
-            <option value="seller">Ventas</option>
-            <option value="marketing">Marketing</option>
-          </optgroup>
-          <optgroup label='Artistas y musicos'>
-            <option value="musician">Músicos y artistas</option>
-          </optgroup>
-          <optgroup label='Educación'>
-            <option value="school teacher">Profesores</option>
-          </optgroup>
-          <optgroup label='Guias'>
-            <option value="Travelers Guides">Guía turistico</option>
-          </optgroup>
-          <optgroup label='Cocina'>
-            <option value="chefs">Chefs y cocina</option>
-          </optgroup>
-          <optgroup label='Animadores'>
-            <option value="business event">Animador de eventos</option>
-          </optgroup>
-          <optgroup label='Otros'>
-            <option value="farm">Agricultura</option>
-            <option value="sewing box">Costura</option>
-            <option value="construction">Construcción</option>
-            <option value="others">Otros</option>
-          </optgroup>
+      </label> 
 
-        </select>
-      </label>
-      <div className='w-full h-[150px] flex gap-2 overflow-x-scroll'>
-       {photo}
-      </div> */}
       <button
         type="submit"
         className="bg-blue-500 hover:bg-blue-600 text-white rounded-md px-4 py-2 mt-4 self-center block"
@@ -191,6 +126,7 @@ const PostForm = (props) => {
       </button>
      
     </form>
+    </>
   );
 };
 

@@ -10,13 +10,14 @@ const useFireBase = () => {
   const [user, setUser] = useState(false);
   const [dtDb, setDtDb] =  useState([]);
   const [sincronize, setSincronize] = useState(true);
+  const [newPost, setNewPost] = useState(true);
   const [loading, setLoading]= useState(false)
   // const uid = auth.currentUser.uid;
  
   const [usersDt, setUsersDt] = useState([]);
   // pexels in firebase
-  const [pexels,setPexels] = useState([]);
-  const [pexelsReady,setPexelsReady] = useState(false);
+  // const [pexels,setPexels] = useState([]);
+  // const [pexelsReady,setPexelsReady] = useState(false);
 
 
   useEffect(() => {
@@ -82,37 +83,37 @@ const useFireBase = () => {
              datanew.push(data)
            })
            setDtDb(datanew);
-           setSincronize(true)
    }catch (err){
     console.error(err)
    }
-  
+   setSincronize(true)
+   setNewPost(true)
   })()
-  },[sincronize])
+  },[sincronize,newPost])
 
   // this fetch effect is for pexels urls save in firebase
-  useEffect(()=>{
+  // useEffect(()=>{
       
-    (async() => {
-     try{
-       const querySnapShot =await getDocs( collection(db, 'pexels'))
-             // console.log("data of query snapshot in useFirebase", querySnapShot)
-             const datanew = [] 
-             querySnapShot?.forEach(doc=>{
-               const data = doc.data()
-              //  console.log('this data is of foreach of querysnapshot',data)
-               datanew.push(data)
-              })
-              setPexels(datanew)
-              setPexelsReady(true)
-              // console.log('pexels in firebase',datanew)
+  //   (async() => {
+  //    try{
+  //      const querySnapShot =await getDocs( collection(db, 'pexels'))
+  //            // console.log("data of query snapshot in useFirebase", querySnapShot)
+  //            const datanew = [] 
+  //            querySnapShot?.forEach(doc=>{
+  //              const data = doc.data()
+  //             //  console.log('this data is of foreach of querysnapshot',data)
+  //              datanew.push(data)
+  //             })
+  //             setPexels(datanew)
+  //             setPexelsReady(true)
+  //             // console.log('pexels in firebase',datanew)
              
-     }catch (err){
-      console.error(err)
-     }
+  //    }catch (err){
+  //     console.error(err)
+  //    }
     
-    })()
-  },[])
+  //   })()
+  // },[])
 
   // const registerUser = (email, password) => createUserWithEmailAndPassword(auth,email,password)
   const registerUser = async (email, password) => {
@@ -165,8 +166,9 @@ const useFireBase = () => {
     usersDt,
     loading,
     setSincronize,
-    pexels,
-    pexelsReady
+    // pexels,
+    // pexelsReady
+    setNewPost
   }
 }
 export {useFireBase}

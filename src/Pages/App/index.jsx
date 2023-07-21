@@ -14,14 +14,14 @@ import { PostPage } from '../PostPage'
 
 
 const AppUI = () => {
-  const {user, dtDb, usersDt, loading, setSincronize,logOut} = useFireBase()
+  const {user, dtDb, usersDt, loading, setSincronize,logOut, setNewPost} = useFireBase()
   // console.log('user at app',user);
   const AppRoutes = () =>{ 
   
     const routesList =[
     {path:'/',element:!user?.emailVerified?<Login/> : <Home loading={loading} user={user} dtDb={dtDb} usersDt={usersDt}/>},
     {path:'/home',element:!user?.emailVerified ?<Login/> : <Home loading={loading} user={user} dtDb={dtDb} usersDt={usersDt} />},
-    {path:'/postform',element:<PostPage user={user} />},
+    {path:'/postform',element:<PostPage setNewPost={setNewPost} user={user} />},
     {path:'/terms',element:<Terms/>},
     {path:'/privacy',element:<Privacy/>},
     {path:'/erase',element:<Erase/>},

@@ -63,7 +63,7 @@ const PostForm = (props) => {
         <p><strong>Lugar: </strong> {formData.city}</p>       
       </div>
   
-    <form onSubmit={handleSubmit} className=" flex flex-col max-w-3xl mx-auto p-4 md:p-8 bg-gray-100 rounded-lg smMax:h-[55vh] overflow-y-scroll scrollNone">
+    <form onSubmit={handleSubmit} className=" flex flex-col max-w-3xl mx-auto p-4 md:p-8 bg-gray-100 rounded-lg smMax:h-[55vh] overflow-y-scroll scrollNone py-14">
       
       <label className="block mb-1">
         Título de la oferta laboral:

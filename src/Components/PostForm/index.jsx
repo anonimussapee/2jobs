@@ -30,11 +30,11 @@ const PostForm = (props) => {
       await addDoc(collection(db, 'posts'), formDataWithNewDate);
       console.log('Publicación creada correctamente');
       props.setNewPost(false)
-      navigate('/')
+      
     } catch (error) {
       console.error('Error al crear la publicación', error);
     }
-
+    navigate('/home')
     // Reiniciar el formulario después de la creación
     setFormData({
       author: '',

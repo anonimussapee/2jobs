@@ -7,7 +7,6 @@
   display: flex;
   flex-direction: row;
   overflow-x: scroll;
-  justify-content: center;
   gap: 1px;
 }
 .btn-card{
@@ -20,4 +19,11 @@
 
 .card-display{
   background:linear-gradient(185deg, rgb(230, 230, 230) , white 100%);
+}
+
+@media (min-width:550px) {
+  .btn-container{
+
+  justify-content: center;
+  }
 }

@@ -11,7 +11,7 @@ const PostForm = (props) => {
     city: '',
     date: new Date().getTime(),
     salary: '',
-    image: 'https://images.pexels.com/photos/5673507/pexels-photo-5673507.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', // Eliminamos el valor predeterminado para la imagen
+    // image: 'https://images.pexels.com/photos/5673507/pexels-photo-5673507.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', // Eliminamos el valor predeterminado para la imagen
     title: '',
   });
 
@@ -41,7 +41,7 @@ const PostForm = (props) => {
       offer: '',
       city: '',
       salary: '',
-      image: 'https://images.pexels.com/photos/5673507/pexels-photo-5673507.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      // image: 'https://images.pexels.com/photos/5673507/pexels-photo-5673507.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       title: '',
     });
   };
@@ -56,7 +56,7 @@ const PostForm = (props) => {
         </div>
         <h3 className='font-extrabold'>Oferta laboral - {formData.title || ''}</h3>
       
-        <img loading='lazy' src={`${formData.image}`} alt={formData.title || 'imagen de evento tal'} className='w-[100%] min-w-[270px] max-w-[420px] h-[150px] smMax:h-[100px] rounded-xl self-center' />
+        {/* <img loading='lazy' src={`${formData.image}`} alt={formData.title || 'imagen de evento tal'} className='w-[100%] min-w-[270px] max-w-[420px] h-[150px] smMax:h-[100px] rounded-xl self-center' /> */}
         <p className='w-[90%] min-w-[280px] max-w-[600px] h-auto  font-bold'>Contenido de la Oferta</p>
         <p className='w-[90%] min-w-[280px] max-w-[600px] h-auto  '>{formData.offer}</p>
         <p><strong>Salario estimado: </strong>$ {(Number(formData.salary)).toFixed(2)} </p>
@@ -107,7 +107,7 @@ const PostForm = (props) => {
           className="border border-gray-300 rounded-md px-3 py-2 w-full mt-1"
         />
       </label>
-      <label className="block mb-1">
+      {/* <label className="block mb-1">
         Ingresa el URL de una imagen que represente tu propuesta:
         <input
           required
@@ -117,7 +117,7 @@ const PostForm = (props) => {
           onChange={handleChange}
           className="border border-gray-300 rounded-md px-3 py-2 w-full mt-1"
         />
-      </label> 
+      </label>  */}
 
       <button
         type="submit"

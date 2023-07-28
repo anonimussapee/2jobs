@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 const SignOut = (props) => {
 
+  const {logOut} = useFireBase() 
   let thisUser = props.usersDt.find(item=>item.uid===props.user.uid)
   if(!thisUser){
     thisUser=props.user

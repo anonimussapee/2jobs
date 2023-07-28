@@ -43,10 +43,6 @@ const CardUserIntro = (props) => {
           </div>
           <p className='underline underline-offset-4 decoration-cyan-500 cursor-pointer font-medium'>Conocer mas personas</p>
         </div>
-        {/* link to the articles of interest */}
-        <div className='w-[100%] p-4 bg-gray-200 font-medium cursor-pointer'>
-          <p className='underline underline-offset-4 decoration-cyan-500'>Articulos que te interesan</p>
-        </div>
         {/* section of clubs, events, and his reaction */}
         <div className='w-[100%] p-4 bg-gray-200 font-medium cursor-pointer '>
           <p className=' text-cyan-600'>Mis intereses:</p>

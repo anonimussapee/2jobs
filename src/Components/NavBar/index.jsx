@@ -46,6 +46,9 @@ const Navbar = (props) => {
             <li className='self-end'>
               <Bars3Icon className='w-16 h-16 ' onClick={()=>setSlideNavbar(!slideNavbar)} />
             </li>
+            <NavLink to={`/home`} className={` ${({isActive})=> isActive ? `${hiddenProp} `+styleActive : null }`} onClick={offSlideBar}>
+              <li>Inicio</li>
+            </NavLink>
             <NavLink to={`/postform`} className={`sm:hidden ${({isActive})=> isActive ? styleActive : null}` } onClick={offSlideBar}>
             <li>Postear</li>
             </NavLink>
@@ -55,7 +58,6 @@ const Navbar = (props) => {
             <NavLink to={`/${logRender.toLowerCase()}`} className={` ${({isActive})=> isActive ? `${hiddenProp} `+styleActive : null }`} onClick={offSlideBar}>
               <li>{logRender}</li>
             </NavLink>
-          
           </ul>
         </div>
       </div>

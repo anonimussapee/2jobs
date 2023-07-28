@@ -11,6 +11,8 @@ import { Erase } from '../Erase'
 import { SignOut } from '../SignOut'
 import { Perfil } from '../Perfil'
 import { PostPage } from '../PostPage'
+import { NotFound } from '../NotFound'
+import { Perfils } from '../Perfils'
 
 
 const AppUI = () => {
@@ -29,6 +31,9 @@ const AppUI = () => {
     {path:'/perfil',element:<Perfil user={user} usersDt={usersDt} setSincronize={setSincronize}/>},
     {path:'/signin',element:<Login/>},
     {path:'/signout',element:<SignOut user={user} logOut={logOut} usersDt={usersDt}/>},
+    {path:'/signout',element:<SignOut user={user} logOut={logOut} usersDt={usersDt}/>},
+    {path:'/perfils/:slug',element:<Perfils usersDt={usersDt}/>},
+    {path:'/*',element:<NotFound />},
     ]
 
     const routes = useRoutes(routesList)

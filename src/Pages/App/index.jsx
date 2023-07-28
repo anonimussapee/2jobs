@@ -32,7 +32,7 @@ const AppUI = () => {
     {path:'/signin',element:<Login/>},
     {path:'/signout',element:<SignOut user={user} logOut={logOut} usersDt={usersDt}/>},
     {path:'/signout',element:<SignOut user={user} logOut={logOut} usersDt={usersDt}/>},
-    {path:'/perfils/:slug',element:<Perfils usersDt={usersDt}/>},
+    {path:'/perfils/:slug',element:<Perfils dtDb={dtDb} usersDt={usersDt}/>},
     {path:'/*',element:<NotFound />},
     ]
 
